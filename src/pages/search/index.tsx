@@ -10,23 +10,23 @@ export const getServerSideProps = async (
 ) => {
   const q = context.query.q as string;
 
-  const movie = await fetchMovies(q);
+  const movies = await fetchMovies(q);
 
   return {
     props: {
-      movie,
+      movies,
     },
   };
 };
 
 export default function Page({
-  movie,
+  movies,
 }: InferGetServerSidePropsType<typeof getServerSideProps>) {
   return (
     <div>
       <h3>검색 결과</h3>
       <div className={style.searchContainer}>
-        {movie.map((m) => (
+        {movies.map((m) => (
           <MovieItem key={m.id} {...m} />
         ))}
       </div>
